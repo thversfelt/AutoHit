@@ -1,79 +1,112 @@
 
-global total := 0
-global hitrate := 135
-global offset := 5
-global padding := 20
+global CurrentTime := 0
+global Hits := 0
+
+global Offset := 5
+global Padding := 20
 
 Gui, +AlwaysOnTop
-Gui, Add, Button, default x10 y5 w60 h30, Perfect
-Gui, Add, Button, default x80 y5 w60 h30, Excellent
-Gui, Add, Button, default x150 y5 w60 h30, Good
-Gui, Add, Button, default x220 y5 w60 h30, Fair
-Gui, Add, Button, default x290 y5 w60 h30, Bad
-Gui, Add, Button, default x360 y5 w60 h30, Unsure
-Gui, Add, Progress, x10 y40 w380 h30 -0x00000001 vMyProgress, 0
-Gui, Add, Text, x390 y47 w30 h10 Center vProgressText, 100`%
-Gui, Show, NoActivate, % total . " Ratings - " . Round(total / hitrate, 2) . " Hours"
+
+Gui, Add, Button, default x10 y4 w60 h22, Set
+Gui, Add, Text, x75 y7 w40 h10 Left, Goal = 
+Gui, Add, Edit, x110 y5 w50 h20 vHitsGoal, 68
+Gui, Add, Text, x162 y7 w40 h10 Left, Hits in
+Gui, Add, Edit, x193 y5 w50 h20 vTimerGoal, 30
+Gui, Add, Text, x245 y7 w60 h10 Left, minutes.
+
+Gui, Add, Button, default x10 y30 w60 h30, Perfect
+Gui, Add, Button, default x80 y30 w60 h30, Excellent
+Gui, Add, Button, default x150 y30 w60 h30, Good
+Gui, Add, Button, default x220 y30 w60 h30, Fair
+Gui, Add, Button, default x290 y30 w60 h30, Bad
+Gui, Add, Button, default x360 y30 w60 h30, Unsure
+
+Gui, Add, Progress, x10 y67 w350 h30 -0x00000001 vTimerProgress, 0
+Gui, Add, Text, x365 y74 w60 h10 Left vTimerProgressText, 0/0 s
+
+Gui, Add, Progress, x10 y104 w350 h30 -0x00000001 vHitsProgress, 0
+Gui, Add, Text, x365 y111 w60 h10 Left vHitsProgressText, 0/0 Hits
+
+Set()
 Return
 
 GuiClose:
 	ExitApp
 Return
 
+ButtonSet:
+	Set()
+Return
+
 ButtonPerfect: 
-	ratePerfect()
+	RatePerfect()
 Return
 
 ButtonExcellent: 
-	rateExcellent()
+	RateExcellent()
 Return
 
 ButtonGood: 
-	rateGood()
+	RateGood()
 Return
 
 ButtonFair: 
-	rateFair()
+	RateFair()
 Return
 
 ButtonBad: 
-	rateBad()
+	RateBad()
 Return
 
 ButtonUnsure: 
-	rateUnsure()
+	RateUnsure()
 Return
 
-^p:: ratePerfect()
-^e:: rateExcellent()
-^g:: rateGood()
-^f:: rateFair()
-^b:: rateBad()
-^u:: rateUnsure()
+^p:: RatePerfect()
+^e:: RateExcellent()
+^g:: RateGood()
+^f:: RateFair()
+^b:: RateBad()
+^u:: RateUnsure()
 
-ratePerfect() {
+RatePerfect() {
 	Submit(0)
 }
 
-rateExcellent() {
+RateExcellent() {
 	Submit(1)
 }
 
-rateGood() {
+RateGood() {
 	Submit(2)
 }
 
-rateFair() {
+RateFair() {
 	Submit(3)
 }
 
-rateBad() {
+RateBad() {
 	Submit(4)
 }
 
-rateUnsure() {
+RateUnsure() {
 	Submit(5)
 }
+
+Set(){
+	CurrentTime := 0
+	Hits := 0
+	
+	UpdateGUI()
+	
+	start := A_TickCount
+	SetTimer, Count, 1000
+}
+
+Count:
+	CurrentTime++
+	UpdateGUI()
+return
 
 Submit(index) {
 
@@ -90,7 +123,7 @@ Submit(index) {
 		MsgBox, That color was not found in the specified region.
 	}
 	else{
-		MouseMove, Px, Py + offset + padding * index, 1
+		MouseMove, Px, Py + Offset + Padding * index, 1
 		Click
 		MouseMove, Px, Py + 325, 1
 		Click
@@ -99,10 +132,24 @@ Submit(index) {
 		MouseMove, Oldx, Oldy, 1
 		CoordMode, Mouse, Relative
 		
-		total++
+		CurrentTime := 0
+		Hits++
 		
-		GuiControl,, MyProgress, % Floor(Mod(total, hitrate / 2) / (hitrate / 2) * 100)
-		GuiControl,, ProgressText, % Round(Mod(total, hitrate / 2) / (hitrate / 2) * 100, 1) . `%
-		Gui, Show, NoActivate, % total . " Ratings"
+		UpdateGUI()
 	}
+}
+
+UpdateGUI(){
+	GuiControlGet, HitsGoal
+	GuiControlGet, TimerGoal
+	
+	allowedTime := Round(min(TimerGoal * 60 / (HitsGoal - Hits), 300))
+	
+	GuiControl,, TimerProgress, % Round(CurrentTime / allowedTime * 100)
+	GuiControl,, TimerProgressText, %CurrentTime%/%allowedTime% s
+	
+	GuiControl,, HitsProgress, % Round(Hits / HitsGoal * 100)
+	GuiControl,, HitsProgressText, %Hits%/%HitsGoal% Hits
+	
+	Gui, Show, NoActivate, AutoHit
 }
