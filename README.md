@@ -3,7 +3,7 @@ A simple AutoHotkey script to assist judge work on [UHRS](https://prod.uhrs.play
 
 ![image](https://user-images.githubusercontent.com/40113382/75798152-72193480-5d76-11ea-81b7-64d00f007fe8.png)
 
-I use this script in my work as an Ad Evaluator. I noticed that I spent about 5-10s moving my cursor to select my ratings and to submit it. When the HitApp requires you to evaluate 135 hits per hours, every hit should take about ~27s. So, about 30% of my time was spent on selecting the right judgement and submitting it. By automating this process, I have dramatically reduced my workload and improved my productivity.
+I use this script in my work as an Ad Evaluator. I noticed that I spent about 5-10s moving my cursor to select my ratings and to submit it. When the HitApp requires you to evaluate 135 hits per hour, every hit should take about ~27s. So, about 30% of my time was spent on selecting the right judgement and submitting it. By automating this process, I have dramatically reduced my workload and improved my productivity.
 
 ## Features:
 - Automatically clicks the corresponding rating and submits it
