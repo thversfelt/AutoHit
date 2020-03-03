@@ -22,10 +22,10 @@ Gui, Add, Button, default x290 y30 w60 h30, Bad
 Gui, Add, Button, default x360 y30 w60 h30, Unsure
 
 Gui, Add, Progress, x10 y67 w350 h30 -0x00000001 vTimerProgress, 0
-Gui, Add, Text, x365 y74 w60 h20 Left vTimerProgressText, 0/0 s
+Gui, Add, Text, x365 y74 w60 h10 Left vTimerProgressText, 0/0 s
 
 Gui, Add, Progress, x10 y104 w350 h30 -0x00000001 vHitsProgress, 0
-Gui, Add, Text, x365 y111 w60 h20 Left vHitsProgressText, 0/0 Hits
+Gui, Add, Text, x365 y111 w60 h10 Left vHitsProgressText, 0/0 Hits
 
 Set()
 Return
