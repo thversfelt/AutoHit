@@ -7,7 +7,7 @@ I use this script in my work as an Ad Evaluator. I noticed that I spent about 5-
 
 ## Features:
 - Automatically clicks the corresponding rating and submits it
-- Set a goal of x hits in y minutes, to improve your productivity
+- Set a goal of *x* hits in *y* minutes, to improve your productivity
 - Dynamically adjusts the countdown timer based on the progress to your goal
 
 ## How to use it:
@@ -22,9 +22,9 @@ I use this script in my work as an Ad Evaluator. I noticed that I spent about 5-
 - Make sure your browser is internet explorer, as recommended by your employer
 - Make sure your browser is in full-screen, AutoHit sometimes doesn't work as expected otherwise
 - AutoHit also works using shortcuts:
-  * Ctrl+P = Perfect
-  * Ctrl+E = Excellent
-  * Ctrl+G = Good
-  * Ctrl+F = Fair
-  * Ctrl+B = Bad
-  * Ctrl+U = Unsure
+  * Ctrl+p = Perfect
+  * Ctrl+e = Excellent
+  * Ctrl+g = Good
+  * Ctrl+f = Fair
+  * Ctrl+b = Bad
+  * Ctrl+u = Unsure
