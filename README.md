@@ -15,7 +15,7 @@ I use this script in my work as an Ad Evaluator. I noticed that I spent about 5-
 2. Login to [UHRS](https://prod.uhrs.playmsn.com/Judge/Views/Login.aspx)
 3. Start your preffered HitApp
 4. Run AutoHit.exe
-5. Set your goal (by default 65 hits in 30 minutes)
+5. Set your goal (by default 68 hits in 30 minutes)
 6. Select your judgement by clicking the corresponding button, AutoHit will submit your judgement instantly
 
 ## Tips:
