@@ -14,7 +14,7 @@ I use this script in my work as an Ad Evaluator. I noticed that I spent about 5-
 1. Download the latest [release](https://github.com/thversfelt/AutoHit/releases)
 2. Login to [UHRS](https://prod.uhrs.playmsn.com/Judge/Views/Login.aspx)
 3. Start your preffered HitApp
-4. Run AutoHit.exe
+4. Run `AutoHit.exe`
 5. Set your goal (by default 68 hits in 30 minutes)
 6. Select your judgement by clicking the corresponding button, AutoHit will submit your judgement instantly
 
@@ -22,9 +22,9 @@ I use this script in my work as an Ad Evaluator. I noticed that I spent about 5-
 - Make sure your browser is internet explorer, as recommended by your employer
 - Make sure your browser is in full-screen, AutoHit sometimes doesn't work as expected otherwise
 - AutoHit also works using shortcuts:
-  * Ctrl+p = Perfect
-  * Ctrl+e = Excellent
-  * Ctrl+g = Good
-  * Ctrl+f = Fair
-  * Ctrl+b = Bad
-  * Ctrl+u = Unsure
+  * `Ctrl+p` = Perfect
+  * `Ctrl+e` = Excellent
+  * `Ctrl+g` = Good
+  * `Ctrl+f` = Fair
+  * `Ctrl+b` = Bad
+  * `Ctrl+u` = Unsure
