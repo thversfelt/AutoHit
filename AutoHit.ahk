@@ -96,7 +96,7 @@ RateUnsure() {
 
 Set(){
 	ElapsedTime := 0
-	CurrentTime := 0
+	HitTime := 0
 	Hits := 0
 	
 	UpdateGUI()
