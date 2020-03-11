@@ -1,5 +1,6 @@
 
-global CurrentTime := 0
+global ElapsedTime := 0
+global HitTime := 0
 global Hits := 0
 
 global Offset := 5
@@ -94,6 +95,7 @@ RateUnsure() {
 }
 
 Set(){
+	ElapsedTime := 0
 	CurrentTime := 0
 	Hits := 0
 	
@@ -104,7 +106,8 @@ Set(){
 }
 
 Count:
-	CurrentTime++
+	ElapsedTime++
+	HitTime++
 	UpdateGUI()
 return
 
@@ -132,7 +135,7 @@ Submit(index) {
 		MouseMove, Oldx, Oldy, 1
 		CoordMode, Mouse, Relative
 		
-		CurrentTime := 0
+		HitTime := 0
 		Hits++
 		
 		UpdateGUI()
@@ -143,10 +146,12 @@ UpdateGUI(){
 	GuiControlGet, HitsGoal
 	GuiControlGet, TimerGoal
 	
-	allowedTime := Round(min(TimerGoal * 60 / (HitsGoal - Hits), 300))
+	availableTime := TimerGoal * 60 - ElapsedTime
+	availableHits := HitsGoal - Hits
+	allowedTime := Round(min(availableTime / availableHits, 300))
 	
-	GuiControl,, TimerProgress, % Round(CurrentTime / allowedTime * 100)
-	GuiControl,, TimerProgressText, %CurrentTime%/%allowedTime% s
+	GuiControl,, TimerProgress, % Round(HitTime / allowedTime * 100)
+	GuiControl,, TimerProgressText, %HitTime%/%allowedTime% s
 	
 	GuiControl,, HitsProgress, % Round(Hits / HitsGoal * 100)
 	GuiControl,, HitsProgressText, %Hits%/%HitsGoal% Hits
