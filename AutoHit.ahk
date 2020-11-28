@@ -201,7 +201,7 @@ UpdateGUI(){
 	GuiControlGet, TimeGoal
 	
 	; Calculate the allowed amount of time per hit.
-	allowedTime := Round(min(TimeGoal * 60 / (HitsGoal - Hits), MaxTime))
+	allowedTime := Round(min((TimeGoal * 60 - PassedTime) / (HitsGoal - Hits), MaxTime))
 
 	; If the judge has passed the allowed amount of time, the timer progress
 	; bar will turn red to indicate the judge has entered overtime.
