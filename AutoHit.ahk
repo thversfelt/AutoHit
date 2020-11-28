@@ -205,17 +205,17 @@ UpdateGUI(){
 
 	; If the judge has passed the allowed amount of time, the timer progress
 	; bar will turn red to indicate the judge has entered overtime.
-	if (CurrentTime < allowedTime){
-		timerProgressColor := "cGreen"
+	if (CurrentTime <= allowedTime){
+		GuiControl, +cGreen, TimerProgress
+		GuiControl,, TimerProgress, % Round(CurrentTime / allowedTime * 100)
 	}
 	else{
-		timerProgressColor := "cRed"
+		GuiControl, +cRed, TimerProgress
+		GuiControl,, TimerProgress, % Round(CurrentTime / MaxTime * 100)
 	}
 
 	; Update the timer progress bar.
-	GuiControl, +%timerProgressColor%, TimerProgress
-	GuiControl,, TimerProgress, % Round(CurrentTime / MaxTime * 100)
-	GuiControl,, TimerProgressText, %CurrentTime%/%allowedTime%~%MaxTime% s
+	GuiControl,, TimerProgressText, %CurrentTime%/%allowedTime% s
 	
 	; Update the time goal progress bar.
 	passedTimeMinutes := Round(PassedTime / 60)
