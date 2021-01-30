@@ -165,7 +165,7 @@ Submit(index) {
 	Sleep, 250
 
 	; Search for the rating radio buttons.
-	PixelSearch, Px, Py, 0, 250, 1000, 1000, 0x707070, 0, Fast
+	PixelSearch, Px, Py, 41, 387, 646, 986, 0x707070, 0, Fast
 
 	if (ErrorLevel) {
 		MsgBox, That color was not found in the specified region.
@@ -203,6 +203,16 @@ UpdateGUI(){
 	; Calculate the allowed amount of time per hit.
 	allowedTime := Round(min((TimeGoal * 60 - PassedTime) / (HitsGoal - Hits), MaxTime))
 
+	if (CurrentTime == allowedTime) {
+		SoundBeep, 1000, 500
+	}
+
+	; If the current time has almost reached the max time for a hit judgement,
+	; a sound will play to alert to judge.
+	if (CurrentTime >= MaxTime - 15){
+		SoundBeep, 500, 500
+	}
+
 	; If the judge has passed the allowed amount of time, the timer progress
 	; bar will turn red to indicate the judge has entered overtime.
 	if (CurrentTime <= allowedTime){
@@ -213,6 +223,8 @@ UpdateGUI(){
 		GuiControl, +cRed, TimerProgress
 		GuiControl,, TimerProgress, % Round(CurrentTime / MaxTime * 100)
 	}
+
+	
 
 	; Update the timer progress bar.
 	GuiControl,, TimerProgressText, %CurrentTime%/%allowedTime% s
